@@ -7,8 +7,6 @@ function Nav(){
 <li>Home</li>
 <li>Log In</li>
 <li>Sign up</li>
-<li>About Us</li>
-<li>Contact Us</li>
             </ul>
         </div>
         </nav>

@@ -15,15 +15,14 @@ function Router() {
             </Layout>
           }
         />
-<Route
-path="*"
-element={
-    <Layout>
-        <Notfound/>
-    </Layout>
-}
->
-    </Route>
+        <Route
+          path="*"
+          element={
+            <Layout>
+              <Notfound />
+            </Layout>
+          }
+        ></Route>
       </Routes>
     </BrowserRouter>
   );
