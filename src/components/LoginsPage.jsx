@@ -8,9 +8,9 @@ function LoginsPage() {
     setShowPassword((prev) => !prev);
   }
   return (
-    <div className="bg-[#0D47A1] h-[100vh] flex justify-center items-center">
-      <div className="bg-white p-[10em] shadow-xl box-border rounded-xl ">
-        <div className="border-2  rounded-lg w-full shadow-lg my-[20px]">
+    <div className="bg-[#0D47A1] h-[100vh] flex justify-center items-center ">
+      <div className="bg-white p-[10em] shadow-xl box-border rounded-xl flex flex-col gap-[2em]">
+        <div className="border-2  rounded-lg w-full shadow-lg ">
           <input
             type="text"
             placeholder="Full Name"
@@ -30,10 +30,27 @@ function LoginsPage() {
             {" "}
             {showPassword ? <LuEye /> : <FaRegEyeSlash />}
           </div>
-
         </div>
-        <div>
-          <a href="#"></a>
+        <div className="flex justify-between">
+          <div className="flex gap-2 items-center">
+            <input type="checkbox" />
+            <p>Remember me</p>
+          </div>
+          <p className="text-[#0D47A1]">Forgot Password?</p>
+        </div>
+        <div className="flex justify-center ">
+          <a
+            href="#"
+            className="bg-[#0D47A1] px-[7em] py-5 rounded-[2em] shadow-lg text-white font-bold"
+          >
+            Log in
+          </a>
+        </div>
+        <div className="flex justify-center  text-[20px] my-2">
+          Dont Have An Account Yet?
+          <a href="Singup" className="text-[#0D47A1]">
+            Sign Up Free
+          </a>
         </div>
       </div>
     </div>
