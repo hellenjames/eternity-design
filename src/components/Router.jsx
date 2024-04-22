@@ -3,6 +3,7 @@ import Layout from "../pages/Layout";
 import Home from "../pages/Home";
 import Notfound from "../pages/Notfound";
 import Signup from "../pages/Signup";
+import Login from "../pages/Login";
 
 function Router() {
   return (
@@ -31,7 +32,18 @@ function Router() {
               <Signup />
             </Layout>
           }
-        ></Route>
+        />
+        <Route
+        path="/login"
+        element={
+          <Layout>
+            <Login/>
+          </Layout>
+        }
+        
+        >
+          
+        </Route>
       </Routes>
     </BrowserRouter>
   );
