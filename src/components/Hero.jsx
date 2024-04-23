@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 function Hero() {
   return (
     <section>
-      <div className=" justify-between items-center ">
+      <div className=" justify-between items-center mt-[5vh]">
         <div className="flex flex-col justify-center items-center gap-3 bg-[linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)),url('./src/assets/images/Home-Decor-Sim-Boon-Yang-BT20210924-XSA-015-00hero.avif')] h-[50vh] bg-no-repeat bg-cover">
           <h1 className=" text-[white] text-4xl text-center font-bold ">
             Best designers that enables the finishing of buildings be great.{" "}
