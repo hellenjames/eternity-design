@@ -1,10 +1,60 @@
 import { LuEye } from "react-icons/lu";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { useState } from "react";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { app } from "../Firebase";
+
 function Signs() {
   const [showPassword, setShowPassword] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+   
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phoneNumber: "",
+    password: "",
+    confirmPassword: "",
+  });
+
   function changeThePassword() {
     setShowPassword((prev) => !prev);
+  }
+  //   function updateErrorMessages() {
+
+  //   }
+  function handleChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
+  function handleRegistration(e) {
+    e.preventDefault();
+    if (formData.fullName === "") {
+      setErrorMessage("Kindly fill all the Fields");
+    }
+    if (formData.email === "") {
+      setErrorMessage("Kindly fill all the Fields");
+    }
+    if (formData.phoneNumber === "") {
+      setErrorMessage("Kindly fill all the Fields");
+    }
+    if (formData.password === "") {
+      setErrorMessage("Kindly fill all the Fields");
+    }
+    if (formData.confirmPassword === "") {
+      setErrorMessage("Kindly fill all the Fields");
+    }
+    if (formData.password !== formData.confirmPassword) {
+      setErrorMessage("The Password does not match");
+    }
+
+    const auth = getAuth(app);
+    createUserWithEmailAndPassword(auth, formData.email, formData.password)
+      .then((userDetails) => {
+        console.log(userDetails);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   return (
     <div className="bg-[#0D47A1] h-[100vh] flex justify-center items-center">
@@ -18,27 +68,38 @@ function Signs() {
               type="text"
               placeholder="Full Name"
               className=" py-5 pr-[20em] px-2 bg-transparent outline-none flex-1 "
+              name="fullName"
+              onChange={handleChange}
             />
           </div>
+
           <div className="border-2  rounded-lg w-full shadow-lg">
             <input
               type="text"
               placeholder="Email"
               className=" py-5 pr-[20em] px-2 bg-transparent outline-none flex-1 "
+              name="email"
+              onChange={handleChange}
             />
           </div>
+
           <div className="border-2  rounded-lg w-full shadow-lg">
             <input
-              type="text"
+              type="number"
               placeholder="Phone Number"
               className=" py-5 pr-[20em] px-2 bg-transparent outline-none flex-1 "
+              name="phoneNumber"
+              onChange={handleChange}
             />
           </div>
+
           <div className="border-2  rounded-lg  shadow-lg flex">
             <input
-              type={showPassword?"password" :"text"}
+              type={showPassword ? "password" : "text"}
               placeholder="password"
               className=" py-5 pr-[20em] px-2 bg-transparent outline-none flex-1 "
+              name="password"
+              onChange={handleChange}
             />
             <div
               className="flex  items-center text-[20px] cursor-pointer pr-4"
@@ -50,14 +111,20 @@ function Signs() {
           </div>
           <div className="border-2  rounded-lg w-full shadow-lg">
             <input
-              type="text"
+              type={showPassword ? "confirm password" : "text"}
               placeholder="Confirm Passsword"
               className=" py-5 pr-[20em] px-2 bg-transparent outline-none flex-1 "
+              name="confirmPassword"
+              onChange={handleChange}
+
             />
           </div>
+          <p className="text-red-400">{errorMessage}</p>
+
           <div className="flex justify-center ">
             <a
-              href="#"
+              href=""
+              onClick={handleRegistration}
               className="bg-[#0D47A1] px-[5em] py-5 rounded-[2em] shadow-lg text-white font-bold"
             >
               Create Account
