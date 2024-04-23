@@ -1,27 +1,28 @@
 import { LuEye } from "react-icons/lu";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { useState } from "react";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { app } from "../Firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 
 function Signs() {
   const [showPassword, setShowPassword] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
-   
+  const [registerSelection, setRegisterSelection] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     phoneNumber: "",
     password: "",
     confirmPassword: "",
+    userType: "",
   });
 
   function changeThePassword() {
     setShowPassword((prev) => !prev);
   }
-  //   function updateErrorMessages() {
 
-  //   }
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
@@ -46,8 +47,13 @@ function Signs() {
     if (formData.password !== formData.confirmPassword) {
       setErrorMessage("The Password does not match");
     }
+    if (formData.userType === "") {
+      setErrorMessage("Kindly select as an Interior designer or a Client");
+    }
+    if(formData){
+      setErrorMessage("")
+    }
 
-    const auth = getAuth(app);
     createUserWithEmailAndPassword(auth, formData.email, formData.password)
       .then((userDetails) => {
         console.log(userDetails);
@@ -55,6 +61,11 @@ function Signs() {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  function handleRegisterSelection(selection) {
+    setRegisterSelection(selection);
+    setFormData((prev) => ({ ...prev, userType: selection }));
   }
   return (
     <div className="bg-[#0D47A1] h-[100vh] flex justify-center items-center">
@@ -111,27 +122,78 @@ function Signs() {
           </div>
           <div className="border-2  rounded-lg w-full shadow-lg">
             <input
-              type={showPassword ? "confirm password" : "text"}
+              type={showPassword ? "password" : "text"}
               placeholder="Confirm Passsword"
               className=" py-5 pr-[20em] px-2 bg-transparent outline-none flex-1 "
               name="confirmPassword"
               onChange={handleChange}
-
             />
           </div>
           <p className="text-red-400">{errorMessage}</p>
 
+          <div className="flex w-full gap-7">
+            <div className="flex-1">
+              <label
+                onClick={() => handleRegisterSelection("designer")}
+                htmlFor="designer"
+                className="bg-[#4c87e0] flex gap-4 justify-center items-center py-[2em] cursor-pointer hover:bg-[#0D47A1]"
+                style={{
+                  backgroundColor:
+                    registerSelection === "designer" ? "#0D47A1" : "#4c87e0",
+                }}
+              >
+                <input
+                  type="radio"
+                  name="type"
+                  id="designer"
+                  className="hidden radio"
+                />
+                <div className=" flex justify-center items-center w-[30px] h-[30px] bg-white rounded-full">
+                  <div className="w-[15px] h-[15px] rounded-full bg-[#0D47A1] hidden"></div>
+                </div>
+                <label htmlFor="" className="text-white font-bold">
+                  Interior Designer
+                </label>
+              </label>
+            </div>
+            <div className="flex-1">
+              <label
+                onClick={() => handleRegisterSelection("client")}
+                htmlFor="client"
+                className="bg-[#4c87e0] flex gap-4 justify-center items-center py-[2em] cursor-pointer"
+                style={{
+                  backgroundColor:
+                    registerSelection === "client" ? "#0D47A1" : "#4c87e0",
+                }}
+              >
+                <input
+                  type="radio"
+                  name="type"
+                  id="client"
+                  className="hidden radio"
+                />
+                <div className=" flex justify-center items-center w-[30px] h-[30px] bg-white rounded-full">
+                  <div className="w-[15px] h-[15px] rounded-full bg-[#0D47A1] hidden"></div>
+                </div>
+
+                <label htmlFor="" className="text-white font-bold">
+                  Client
+                </label>
+              </label>
+            </div>
+          </div>
+
           <div className="flex justify-center ">
-            <a
-              href=""
+            <button
               onClick={handleRegistration}
-              className="bg-[#0D47A1] px-[5em] py-5 rounded-[2em] shadow-lg text-white font-bold"
+              className="bg-[#0D47A1] px-[5em] py-5 rounded-[2em] shadow-lg text-white font-bold "
             >
               Create Account
-            </a>
+            </button>
           </div>
+
           <div className="flex justify-center text-[25px]">
-            Already Have An Account{" "}
+            Already Have An Account?{" "}
             <a href="/login" className="text-[#0D47A1] ">
               Log in
             </a>

@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/******* Custom styles *******/
+
+/* Register radio buttons */
+
+.radio:checked ~ div > div {
+  display: block;
+}

@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import Notfound from "../pages/Notfound";
 import Signup from "../pages/Signup";
 import Login from "../pages/Login";
+import Formdetails from "../pages/Formdetails";
 
 function Router() {
   return (
@@ -34,16 +35,21 @@ function Router() {
           }
         />
         <Route
-        path="/login"
-        element={
-          <Layout>
-            <Login/>
-          </Layout>
-        }
-        
-        >
-          
-        </Route>
+          path="/login"
+          element={
+            <Layout>
+              <Login />
+            </Layout>
+          }
+        />
+        <Route
+          path="/formdetails"
+          element={
+            <Layout>
+              <Formdetails />
+            </Layout>
+          }
+        ></Route>
       </Routes>
     </BrowserRouter>
   );
