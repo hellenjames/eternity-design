@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "../pages/Layout";
 import Home from "../pages/Home";
 import Notfound from "../pages/Notfound";
+import About from "../pages/About";
 
 function Router() {
   return (
@@ -22,7 +23,17 @@ function Router() {
               <Notfound />
             </Layout>
           }
-        ></Route>
+        />
+           <Route
+          path="/about"
+          element={
+            <Layout>
+              <About />
+            </Layout>
+          }
+        >
+
+        </Route>
       </Routes>
     </BrowserRouter>
   );

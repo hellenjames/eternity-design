@@ -6,7 +6,7 @@ import living from"../assets/images/living.webp"
 function Designs(){
     return(
         <div>
-            <h2  className="text-2xl text-[#0D47A1] text-center">Designs For Every Environment</h2>
+            <h2  className="text-2xl text-[#0D47A1] text-center my-5 font-bold">Designs For Every Environment</h2>
 
         <div className="flex container mx-auto"> 
             
