@@ -3,6 +3,7 @@ import Layout from "../pages/Layout";
 import Home from "../pages/Home";
 import Notfound from "../pages/Notfound";
 import About from "../pages/About";
+import Post from "../pages/Post";
 
 function Router() {
   return (
@@ -31,7 +32,15 @@ function Router() {
               <About />
             </Layout>
           }
-        >
+        />
+          <Route
+          path="/post"
+          element={
+            <Layout>
+              <Post/>
+            </Layout>
+          }
+          >
 
         </Route>
       </Routes>
