@@ -3,7 +3,7 @@ import Layout from "../pages/Layout";
 import Home from "../pages/Home";
 import Notfound from "../pages/Notfound";
 import About from "../pages/About";
-import Post from "../pages/Post";
+import Designer from "../pages/Designer";
 
 function Router() {
   return (
@@ -34,10 +34,10 @@ function Router() {
           }
         />
           <Route
-          path="/post"
+          path="/designer"
           element={
             <Layout>
-              <Post/>
+              <Designer/>
             </Layout>
           }
           >
