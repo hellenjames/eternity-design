@@ -1,6 +1,9 @@
 import { FaRegEyeSlash } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { LuEye } from "react-icons/lu";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 function LoginsPage() {
   const [showPassword, setShowPassword] = useState(true);
@@ -18,7 +21,7 @@ function LoginsPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
-  function handleRegistration(e) {
+  async function handleRegistration(e) {
     e.preventDefault();
 
     if (formData.email === "") {
@@ -26,12 +29,34 @@ function LoginsPage() {
     }
     if (formData.password === "") {
       setErrorMessage("Kindly fill all the Fields");
+    } else {
+      signInWithEmailAndPassword(auth, formData.email, formData.password)
+        .then(async (userData) => {
+          const user = userData.user;
+          console.log(user);
+          if (user) {
+            const querySnapshot = await getDocs(
+              collection(db, "userInformation")
+            );
+            console.log(querySnapshot);
+
+            // querySnapshot.forEach((doc) => {
+            //   console.log(doc.id, " => ", doc.data());
+            // });
+          }
+        })
+        .catch((error) => {
+         
+        });
     }
   }
   return (
     <div className="bg-[#0D47A1] h-[100vh] flex justify-center items-center ">
       <div className="bg-white p-[10em] shadow-xl box-border rounded-xl flex flex-col gap-[2em]">
-        <div className="border-2  rounded-lg w-full shadow-lg " onChange={handleChange}>
+        <div
+          className="border-2  rounded-lg w-full shadow-lg "
+          onChange={handleChange}
+        >
           <input
             type="text"
             placeholder="Email"
@@ -39,7 +64,10 @@ function LoginsPage() {
             name="email"
           />
         </div>
-        <div className="border-2  rounded-lg  shadow-lg flex" onChange={handleChange}>
+        <div
+          className="border-2  rounded-lg  shadow-lg flex"
+          onChange={handleChange}
+        >
           <input
             type={showPassword ? "password" : "text"}
             placeholder="password"
@@ -65,7 +93,7 @@ function LoginsPage() {
             Forgot Password?
           </p>
         </div>
-        <div className="flex justify-center "onClick={handleRegistration} >
+        <div className="flex justify-center " onClick={handleRegistration}>
           <a
             href="#"
             className="bg-[#0D47A1] px-[7em] py-5 rounded-[2em] shadow-lg text-white font-bold"

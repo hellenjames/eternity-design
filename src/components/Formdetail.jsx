@@ -7,14 +7,65 @@ function Formdetail() {
   const [formStorage, setFormStorage] = useState({
     companiesName: "",
     address: "",
-    serviceOffered: "",
-    image: "",
+    tags: "",
+    description: "",
+    detailedInformation: "",
+    logoImage: "",
+    projectImages: [],
+    imageDisplay: "",
   });
-  function handleChangeImage(e) {
+  function handleChangeImage(e, imageType) {
     const storage = getStorage();
-    const file = e.target.files[0];
-    const storageRef = ref(storage, `designers/${file.name}`);
+    const files = e.target.files;
     const reader = new FileReader();
+
+    if (imageType === "logo") {
+      console.log("logo");
+
+      const storageRef = ref(storage, `designers/${files[0].name}`);
+
+      reader.onloadend = function () {
+        const dataResult = reader.result;
+        uploadString(storageRef, dataResult, "data_url").then((snapshot) => {
+          console.log("Uploaded a data_url string!");
+          formStorage.logoImage = `https://firebasestorage.googleapis.com/v0/b/eternity-design.appspot.com/o/designers%2F${files[0].name}?alt=media`;
+        });
+
+        console.log("RESULT", reader.result);
+      };
+    }
+
+    if (imageType === "display") {
+      console.log("display");
+
+      const storageRef = ref(storage, `designers/${files[0].name}`);
+
+      reader.onloadend = function () {
+        const dataResult = reader.result;
+        uploadString(storageRef, dataResult, "data_url").then((snapshot) => {
+          console.log("Uploaded a data_url string!");
+          formStorage.imageDisplay = `https://firebasestorage.googleapis.com/v0/b/eternity-design.appspot.com/o/designers%2F${files[0].name}?alt=media`;
+        });
+        console.log("RESULT", reader.result);
+      };
+
+      if (imageType === "multiple") {
+        console.log("multiple");
+
+        // reader.onloadend = function () {
+        //   const dataResult = reader.result;
+        //   uploadString(storageRef, dataResult, "data_url").then(
+        //     (snapshot) => {
+        //       console.log("Uploaded a data_url string!");
+        //       formStorage.image = `https://firebasestorage.googleapis.com/v0/b/eternity-design.appspot.com/o/designers%2F${file.name}?alt=media`;
+        //     }
+        //   );
+
+        //   console.log("RESULT", reader.result);
+        // };
+      }
+    }
+
     reader.onloadend = function () {
       const dataResult = reader.result;
       uploadString(storageRef, dataResult, "data_url").then((snapshot) => {
@@ -24,7 +75,7 @@ function Formdetail() {
 
       console.log("RESULT", reader.result);
     };
-    reader.readAsDataURL(file);
+    // reader.readAsDataURL(file);
   }
 
   function handleStorageData(e) {
@@ -38,22 +89,45 @@ function Formdetail() {
     if (formStorage.address === "") {
       setRegisterValidation("Kindly fill all the empty Fields");
     }
-    if (formStorage.serviceOffered === "") {
+    if (formStorage.tags === "") {
       setRegisterValidation("Kindly fill all the empty Fields");
+    }
+    if (formStorage.description === "") {
+      setRegisterValidation("Kindly fill all the empty Fields");
+    }
+    if (formStorage.detailedInformation === "") {
+      setRegisterValidation("Kindly fill all the empty Fields");
+    }
+
+    if (formStorage.image === "") {
+      setRegisterValidation("Kindly upload all images");
     } else {
-      const docRef = await addDoc(collection(db, "inputs"), formStorage);
+      const docRef = await addDoc(collection(db, "designers"), formStorage);
       console.log("Document written with ID: ", docRef.id);
+      if (docRef.id) {
+        setFormStorage({
+          companiesName: "",
+          address: "",
+          tags: "",
+          description: "",
+          detailedInformation: "",
+          logoImage: "",
+          projectImages: [],
+          imageDisplay: "",
+        });
+      }
+      console.log(formStorage);
     }
   }
 
   return (
-    <div className="bg-[#0D47A1] h-[70vh] flex justify-center items-center">
-      <div className="flex flex-col p-[5em] bg-white gap-3 shadow-lg rounded-lg">
-        <div className="border-2  rounded-lg  shadow-lg flex">
+    <div className="bg-[#0D47A1] h-[150vh] flex justify-center items-center">
+      <div className="flex flex-col p-[2em] bg-white gap-3 shadow-lg rounded-lg w-[40%]">
+        <div className="border-2  rounded-lg  shadow-lg  ">
           <input
             type="text"
             placeholder="Companies Name:"
-            className=" py-5 pr-[20em] px-2 bg-transparent outline-none flex-1 "
+            className=" py-5 w-[100%] px-2 bg-transparent outline-none"
             name="companiesName"
             onChange={(e) => handleStorageData(e)}
           />
@@ -62,7 +136,7 @@ function Formdetail() {
           <input
             type="text"
             placeholder="Address:"
-            className=" py-5 pr-[20em] px-2 bg-transparent outline-none flex-1 "
+            className=" py-5 w-[100%] px-2 bg-transparent outline-none flex-1 "
             name="address"
             onChange={(e) => handleStorageData(e)}
           />
@@ -70,21 +144,72 @@ function Formdetail() {
         <div className="border-2  rounded-lg  shadow-lg flex">
           <input
             type="text"
-            placeholder="Services Offered:"
-            className=" py-5 pr-[20em] px-2 bg-transparent outline-none flex-1 "
-            name="servicesOffered"
+            placeholder="Enter commer seperated Tags e.g wedding, graduations etc:"
+            className=" py-5 w-[100%] px-2 bg-transparent outline-none flex-1 "
+            name="tags"
             onChange={(e) => handleStorageData(e)}
           />
         </div>
+        <div className="border-2  rounded-lg  shadow-lg flex">
+          <input
+            type="text"
+            placeholder="Short Description:"
+            className=" py-5 w-[100%] px-2 bg-transparent outline-none flex-1 "
+            name="description"
+            onChange={(e) => handleStorageData(e)}
+          />
+        </div>
+        <div className="border-2  rounded-lg  shadow-lg flex">
+          <textarea
+            name="detailedInformation"
+            id=""
+            cols="30"
+            rows="10"
+            type="text"
+            placeholder="Detailed Information About Company:"
+            className=" py-5 w-[100%] px-2 bg-transparent outline-none flex-1 resize-none"
+            onChange={(e) => handleStorageData(e)}
+          ></textarea>
+        </div>
         <p className="text-red-400">{registerValidation}</p>
+        <div>
+          <h2 className="underline underline-offset-2">
+            Upload Companies Logo:
+          </h2>
+          <input
+            type="file"
+            placeholder="file"
+            className=" py-5 w-[100%] px-2 bg-transparent outline-none flex-1 "
+            onChange={(e) => handleChangeImage(e, "logo")}
+            name="logoImage"
+          />
+        </div>
+        <div>
+          <h2 className="underline underline-offset-2">
+            Uplaod images of projects done:
+          </h2>
+          <input
+            type="file"
+            placeholder="file"
+            className=" py-5 w-[100%] px-2 bg-transparent outline-none flex-1 "
+            onChange={(e) => handleChangeImage(e, "multiple")}
+            name="projectImages"
+            multiple
+          />
+        </div>
+        <div>
+          <h2 className="underline underline-offset-2">
+            Uplaod image to be displayed on page:
+          </h2>
+          <input
+            type="file"
+            placeholder="file"
+            className=" py-5 w-[100%] px-2 bg-transparent outline-none flex-1 "
+            onChange={(e) => handleChangeImage(e, "display")}
+            name="imageDisplay"
+          />
+        </div>
 
-        <input
-          type="file"
-          placeholder="file"
-          className=" py-5 pr-[20em] px-2 bg-transparent outline-none flex-1 "
-          onChange={(e) => handleChangeImage(e)}
-          name="image"
-        />
         <div className="flex justify-center ">
           <button
             onClick={handlePostSubmit}

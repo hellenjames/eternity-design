@@ -3,8 +3,16 @@ import { FaRegEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
+
+import { useNavigate } from "react-router-dom";
+
+// import { Navigate, useNavigate } from "react-router-dom";
 
 function Signs() {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [registerSelection, setRegisterSelection] = useState("");
@@ -48,17 +56,36 @@ function Signs() {
       setErrorMessage("The Password does not match");
     }
     if (formData.userType === "") {
-      setErrorMessage("Kindly select as an Interior designer or a Client");
+      setErrorMessage(
+        "Kindly select either as an Interior designer or a Client"
+      );
     }
- 
-
-    createUserWithEmailAndPassword(auth, formData.email, formData.password)
-      .then((userDetails) => {
-        console.log(userDetails);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (formData.password.length < 6) {
+      setErrorMessage("Password should be atleast 6 Characters");
+    } else {
+      setErrorMessage("");
+      createUserWithEmailAndPassword(auth, formData.email, formData.password)
+        .then(async (userDetails) => {
+          const user = userDetails.user;
+          console.log(user);
+          if (user) {
+            const docRef = await addDoc(
+              collection(db, "userInformation"),
+              formData
+            );
+            console.log("Document written with ID: ", docRef.id);
+            navigate("/login");
+          }
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // console.log(error)
+          if (errorCode === "auth/email-already-in-use") {
+            setErrorMessage("An account with that emaill already exists");
+          }
+        });
+    }
   }
 
   function handleRegisterSelection(selection) {
