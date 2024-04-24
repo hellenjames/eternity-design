@@ -9,14 +9,16 @@ import img7 from "../assets/images/img7.webp";
 import img8 from "../assets/images/img8.jpg";
 function Posts() {
   return (
+    <>
     <div className="flex-wrap container mx-auto">
-      <div className="flex justify-between">
-        <Postperson img={img1} name="A" details="" />
-        <Postperson img={img2} name="B" details="" />
-        <Postperson img={img3} name="C" details="" />
-        <Postperson img={img4} name="D" details="" />
+      <div className="flex gap-7">
+        <Postperson img={img1} name="Roky" details="De" />
+        {/* <Postperson img={img2} name="B" details="" />
+         <Postperson img={img3} name="C" details="" />
+        <Postperson img={img4} name="D" details="" /> */}
       </div>
     </div>
+    </>
   );
 }
 export default Posts;

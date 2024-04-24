@@ -5,6 +5,7 @@ function Post(){
     return(
         <div>
             <Postfilter/>
+            
             <Posts/>
         </div>
     )
