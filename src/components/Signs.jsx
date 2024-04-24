@@ -50,9 +50,7 @@ function Signs() {
     if (formData.userType === "") {
       setErrorMessage("Kindly select as an Interior designer or a Client");
     }
-    if(formData){
-      setErrorMessage("")
-    }
+ 
 
     createUserWithEmailAndPassword(auth, formData.email, formData.password)
       .then((userDetails) => {
