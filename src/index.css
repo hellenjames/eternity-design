@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+
 body{
     font-family: "Josefin Sans", sans-serif;
+}
+
+/******* Custom styles *******/
+
+/* Register radio buttons */
+
+.radio:checked ~ div > div {
+  display: block;
 }
