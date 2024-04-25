@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import Notfound from "../pages/Notfound";
 import About from "../pages/About";
 import Designer from "../pages/Designer";
+import Rocky from "../pages/Rocky";
 
 function Router() {
   return (
@@ -40,7 +41,14 @@ function Router() {
               <Designer/>
             </Layout>
           }
-          >
+          />
+            <Route
+            path="/rocky"
+            element={
+              <Layout>
+                <Rocky/>
+              </Layout>
+            }>
 
         </Route>
       </Routes>

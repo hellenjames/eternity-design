@@ -12,7 +12,7 @@ function Designers() {
     <>
     <div className="flex-wrap container mx-auto">
       <div className="flex gap-7">
-        <Designereach img={img1} name="Roky Africa" details="Dealers in all event and occassions" />
+        <Designereach  name="Roky Africa" details="Dealers in all event and occassions" />
         
         {/* <Postperson img={img2} name="B" details="" />
          <Postperson img={img3} name="C" details="" />

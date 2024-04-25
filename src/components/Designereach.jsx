@@ -13,7 +13,9 @@ function Designereach({ img, name, details }) {
         <p className="text-center">{name}</p>
         <p className="text-center">{details}</p>
       </div>
+      <div> <p className="flex justify-center">Location:Nairobi</p></div>
       <div className="flex gap-3 text-[#0D47A1] font-bold my-3 ">
+       
         <p className="border rounded-xl py-1 px-3 bg-[#0D47A1] text-white">Weddings</p>
         <p className="border rounded-xl py-1 px-3 bg-[#0D47A1] text-white">Graduations</p>
         <p className="border rounded-xl py-1 px-3 bg-[#0D47A1] text-white">Offices</p>
