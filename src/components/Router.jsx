@@ -2,9 +2,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "../pages/Layout";
 import Home from "../pages/Home";
 import Notfound from "../pages/Notfound";
+
 import Signup from "../pages/Signup";
 import Login from "../pages/Login";
 import Formdetails from "../pages/Formdetails";
+
+import About from "../pages/About";
+
 
 function Router() {
   return (
@@ -26,6 +30,7 @@ function Router() {
             </Layout>
           }
         />
+
         <Route
           path="/signup"
           element={
@@ -50,6 +55,18 @@ function Router() {
             </Layout>
           }
         ></Route>
+
+           <Route
+          path="/about"
+          element={
+            <Layout>
+              <About />
+            </Layout>
+          }
+        >
+
+        </Route>
+
       </Routes>
     </BrowserRouter>
   );
