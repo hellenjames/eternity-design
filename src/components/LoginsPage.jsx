@@ -3,18 +3,27 @@ import { useState, useEffect } from "react";
 import { LuEye } from "react-icons/lu";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, query, where, and, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 function LoginsPage() {
+  const [currentUser, setCurrentUser] = useState("");
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(true);
   function changeThePassword() {
     setShowPassword((prev) => !prev);
   }
   const [errorMessage, setErrorMessage] = useState("");
 
+ 
+
+ 
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    userType: "",
   });
 
   function handleChange(e) {
@@ -29,26 +38,46 @@ function LoginsPage() {
     }
     if (formData.password === "") {
       setErrorMessage("Kindly fill all the Fields");
+    }
+    if (formData.password.length < 6) {
+      setErrorMessage("Password should be atleast 6 Characters");
     } else {
-      signInWithEmailAndPassword(auth, formData.email, formData.password)
+      signInWithEmailAndPassword(auth, formData.email, formData.password, formData.userType)
         .then(async (userData) => {
           const user = userData.user;
           console.log(user);
-          if (user) {
-            const querySnapshot = await getDocs(
-              collection(db, "userInformation")
-            );
-            console.log(querySnapshot);
 
-            // querySnapshot.forEach((doc) => {
-            //   console.log(doc.id, " => ", doc.data());
-            // });
+          if (user) {
+            setCurrentUser(user);
+            const docRef = await addDoc(collection(db, "interiorDesiner"), formData);
+
+            console.log("Wazi 2");
           }
         })
         .catch((error) => {
-         
+          setErrorMessage("Login Faild. Please try again");
         });
     }
+  }
+
+  if (currentUser) {
+    const q = query(
+      collection(db, "userInformation"),
+      and(where("email", "==", formData.email))
+    );
+
+    getDocs(q).then((qSnap) => {
+      const data = qSnap.docs.map((d) => ({ id: d.id, ...d.data() }));
+      console.log(data[0]);
+
+      if (data[0].userType === "designer") {
+        navigate("/formdetails");
+      }else if(data[0].userType === "client"){
+        navigate("/formdetails");
+      }
+    });
+
+    console.log(q);
   }
   return (
     <div className="bg-[#0D47A1] h-[100vh] flex justify-center items-center ">

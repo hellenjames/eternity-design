@@ -48,21 +48,24 @@ function Formdetail() {
         });
         console.log("RESULT", reader.result);
       };
+    }
 
-      if (imageType === "multiple") {
-        console.log("multiple");
+    if (imageType === "multiple") {
+      for (let i = 0; i <= files.length; i++) {
+        const storageRef = ref(storage, `designers/${files[0].name}`);
+        reader.onloadend = function () {
+          const dataResult = reader.result;
+          uploadString(storageRef, dataResult, "data_url").then((snapshot) => {
+            console.log("Uploaded a data_url string!");
+            formStorage.projectImages = [
+              ...formStorage.projectImages,
+              `https://firebasestorage.googleapis.com/v0/b/eternity-design.appspot.com/o/designers%2F${files[i].name}?alt=media`,
+            ];
+          });
 
-        // reader.onloadend = function () {
-        //   const dataResult = reader.result;
-        //   uploadString(storageRef, dataResult, "data_url").then(
-        //     (snapshot) => {
-        //       console.log("Uploaded a data_url string!");
-        //       formStorage.image = `https://firebasestorage.googleapis.com/v0/b/eternity-design.appspot.com/o/designers%2F${file.name}?alt=media`;
-        //     }
-        //   );
-
-        //   console.log("RESULT", reader.result);
-        // };
+          console.log("RESULT", reader.result);
+        };
+        console.log(files[i]);
       }
     }
 
@@ -99,7 +102,13 @@ function Formdetail() {
       setRegisterValidation("Kindly fill all the empty Fields");
     }
 
-    if (formStorage.image === "") {
+    if (formStorage.logoImage === "") {
+      setRegisterValidation("Kindly upload all images");
+    }
+    if (formStorage.projectImages === "") {
+      setRegisterValidation("Kindly upload all images");
+    }
+    if (formStorage.imageDisplay === "") {
       setRegisterValidation("Kindly upload all images");
     } else {
       const docRef = await addDoc(collection(db, "designers"), formStorage);
@@ -116,7 +125,6 @@ function Formdetail() {
           imageDisplay: "",
         });
       }
-      console.log(formStorage);
     }
   }
 
