@@ -73,7 +73,7 @@ function LoginsPage() {
       if (data[0].userType === "designer") {
         navigate("/formdetails");
       }else if(data[0].userType === "client"){
-        navigate("/formdetails");
+        navigate("/designer");
       }
     });
 

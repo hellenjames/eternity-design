@@ -16,7 +16,7 @@ function Signs() {
   const [showPassword, setShowPassword] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [registerSelection, setRegisterSelection] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -86,7 +86,18 @@ function Signs() {
           }
         });
     }
+
+    function handleSave() {
+      setLoading(true)
+  
+      for (let i = 1; i < 20000; i++) {};
+  
+      setLoading(false)
+  
+    }
   }
+
+
 
   function handleRegisterSelection(selection) {
     setRegisterSelection(selection);
@@ -210,7 +221,9 @@ function Signs() {
 
           <div className="flex justify-center ">
             <button
-              onClick={handleRegistration}
+            disabled={isLoading}
+           
+              onClick={handleRegistration }
               className="bg-[#0D47A1] px-[5em] py-5 rounded-[2em] shadow-lg text-white font-bold "
             >
               Create Account
