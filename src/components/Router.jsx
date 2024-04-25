@@ -8,6 +8,8 @@ import Login from "../pages/Login";
 import Formdetails from "../pages/Formdetails";
 
 import About from "../pages/About";
+import Designer from "../pages/Designer";
+import Rocky from "../pages/Rocky";
 
 
 function Router() {
@@ -63,7 +65,22 @@ function Router() {
               <About />
             </Layout>
           }
-        >
+        />
+          <Route
+          path="/designer"
+          element={
+            <Layout>
+              <Designer/>
+            </Layout>
+          }
+          />
+            <Route
+            path="/rocky"
+            element={
+              <Layout>
+                <Rocky/>
+              </Layout>
+            }>
 
         </Route>
 
