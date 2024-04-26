@@ -1,36 +1,32 @@
 import { Link } from "react-router-dom";
 function Footer() {
   return (
-    <footer>
+    <footer className="shadow-[0_0_8px_lightgray]">
+      <div className="py-1">
       <div className="container mx-auto">
-        <div>
-          <h1 className="text-2xl text-[#0D47A1] text-center font-bold">
-            Innovative Designs,Lasting Impressions
-          </h1>
-        </div>
-        <div className="flex justify-between my-5 leading-7">
+        
+        <div className="flex justify-between my-5 leading-[2.5]">
           <div>
             <Link to="/">
               <img src="src/assets/images/logo.png" width={200} />
             </Link>
             <p className="w-48">
-              As Eternity Designers we are dedicated in bringing your work to
-              action by creating spaces that are functional and stylish .
+              As Eternity Designers we are dedicated.
             </p>
           </div>
           <div>
             <h2 className="font-bold text-[#0D47A1]">Quick Links</h2>
-            <ul>
+            <ul cl>
               <Link to="/">
                 <li>Home </li>
               </Link>
-              <Link to="/log">
+              <Link to="/login">
                 <li>Log In</li>
               </Link>
-              <Link to="/sign">
+              <Link to="/signup">
                 <li>Sign Up</li>
               </Link>
-              <Link to="/about">
+              <Link to="/aboutus">
                 <li>About Us</li>
               </Link>
             </ul>
@@ -50,6 +46,7 @@ function Footer() {
             <p>design@eternityinteriors.co.ke</p>
           </div>
         </div>
+      </div>
       </div>
     </footer>
   );

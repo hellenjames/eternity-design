@@ -14,9 +14,7 @@ function Designers() {
       <div className="flex gap-7">
         <Designereach  name="Roky Africa" details="Dealers in all event and occassions" />
         
-        {/* <Postperson img={img2} name="B" details="" />
-         <Postperson img={img3} name="C" details="" />
-        <Postperson img={img4} name="D" details="" /> */}
+        
       </div>
     </div>
     </>

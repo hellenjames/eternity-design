@@ -7,7 +7,6 @@ import Signup from "../pages/Signup";
 import Login from "../pages/Login";
 import Formdetails from "../pages/Formdetails";
 
-import About from "../pages/About";
 import Designer from "../pages/Designer";
 import Rocky from "../pages/Rocky";
 
@@ -58,14 +57,6 @@ function Router() {
           }
         ></Route>
 
-           <Route
-          path="/about"
-          element={
-            <Layout>
-              <About />
-            </Layout>
-          }
-        />
           <Route
           path="/designer"
           element={

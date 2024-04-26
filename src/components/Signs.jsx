@@ -105,9 +105,18 @@ function Signs() {
     setFormData((prev) => ({ ...prev, userType: selection }));
   }
   return (
+
+    <>
+    <div className="w-[50vw] h-[90vh] bg-[#0D47A1] absolute -z-10 right-0"></div>
+    <div className=" h-[100vh] flex justify-center items-center shadow-[0_0_5px_lightgray] z-10">
+      <div className="flex bg-white box-boder p-[50px] rounded-xl">
+      <div className="flex justify-center text-center text-5xl text-[#0D47A1]">Sign Up</div>
+       
+
     <div className="bg-[#0D47A1] h-[100vh] flex justify-center items-center">
       {isLoading && <Loader />}
       <div className="flex bg-white box-boder shadow-lg p-[50px] rounded-xl">
+
         <div className="bg-white w-[100%] h-[100]">
           <img src="src/assets/images/signup.jpg" />
         </div>
@@ -167,14 +176,14 @@ function Signs() {
               onChange={handleChange}
             />
           </div>
-          <p className="text-red-400">{errorMessage}</p>
-
+<label>Register as:</label>
           <div className="flex w-full gap-7">
+            
             <div className="flex-1">
               <label
                 onClick={() => handleRegisterSelection("designer")}
                 htmlFor="designer"
-                className="bg-[#4c87e0] flex gap-4 justify-center items-center py-[2em] cursor-pointer hover:bg-[#0D47A1]"
+                className="bg-[#4c87e0] flex gap-4 justify-center items-center py-[1em] cursor-pointer hover:bg-[#0D47A1]"
                 style={{
                   backgroundColor:
                     registerSelection === "designer" ? "#0D47A1" : "#4c87e0",
@@ -198,7 +207,7 @@ function Signs() {
               <label
                 onClick={() => handleRegisterSelection("client")}
                 htmlFor="client"
-                className="bg-[#4c87e0] flex gap-4 justify-center items-center py-[2em] cursor-pointer"
+                className="bg-[#4c87e0] flex gap-4 justify-center items-center py-[1em] cursor-pointer"
                 style={{
                   backgroundColor:
                     registerSelection === "client" ? "#0D47A1" : "#4c87e0",
@@ -220,6 +229,7 @@ function Signs() {
               </label>
             </div>
           </div>
+          <p className="text-red-400">{errorMessage}</p>
 
           <div className="flex justify-center ">
             <button
@@ -231,7 +241,7 @@ function Signs() {
           </div>
 
           <div className="flex justify-center text-[25px]">
-            Already Have An Account?{" "}
+            Already Have An Account?
             <a href="/login" className="text-[#0D47A1] ">
               Log in
             </a>
@@ -239,6 +249,7 @@ function Signs() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
