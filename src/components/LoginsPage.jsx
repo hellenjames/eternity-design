@@ -73,19 +73,22 @@ function LoginsPage() {
       if (data[0].userType === "designer") {
         navigate("/formdetails");
       }else if(data[0].userType === "client"){
-        navigate("/formdetails");
+        navigate("/designer");
       }
     });
 
     console.log(q);
   }
   return (
+    <>
     <div className="bg-[#0D47A1] h-[100vh] flex justify-center items-center ">
       <div className="bg-white p-[10em] shadow-xl box-border rounded-xl flex flex-col gap-[2em]">
+      <div className="flex justify-center text-center text-5xl text-[#0D47A1]">Log In</div>
         <div
           className="border-2  rounded-lg w-full shadow-lg "
           onChange={handleChange}
         >
+         
           <input
             type="text"
             placeholder="Email"
@@ -142,6 +145,7 @@ function LoginsPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

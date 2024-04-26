@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Aboutus from "./Aboutus";
 function Hero() {
   return (
     <section>
@@ -18,9 +19,9 @@ function Hero() {
               <button className="border rounded-full py-4 px-[4em] bg-[transparent] text-[white] font-bold outline-none hover:bg-[#0D47A1]">
                 Get Started
               </button>
-              <Link to="/about"><button className="border border-[#0D47A1] rounded-full py-4 px-[4em] bg-[#0D47A1] text-[white] font-bold outline-none hover:bg-[transparent] hover:border-white">
+              <button className="border border-[#0D47A1] rounded-full py-4 px-[4em] bg-[#0D47A1] text-[white] font-bold outline-none hover:bg-[transparent] hover:border-white" onClick={()=><Aboutus/>}>
                 About Us
-              </button></Link>
+              </button>
             </div>
           </div>
           <div className="flex text-white gap-5 mt-8">
@@ -34,7 +35,7 @@ function Hero() {
                 autem aliquid rerum, eaque sit!
               </p>
             </div>
-            <div className="bg-[linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6))] flex flex-col justify-start items-start gap-3 p-[2em]">
+            <div className="bg-[linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6))] bg-fixed flex flex-col justify-start items-start gap-3 p-[2em]">
             <img src="src/assets/images/icon-moon.svg" alt="icon" width={50}/>
               <h3 className="text-[1.5rem] font-medium">Find more</h3>
               <p className="font-light">
