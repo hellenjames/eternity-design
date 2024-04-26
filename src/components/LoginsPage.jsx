@@ -6,19 +6,18 @@ import { auth } from "../firebase";
 import { collection, query, where, and, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import { useNavigate } from "react-router-dom";
+import Loader from "./Loader";
 
 function LoginsPage() {
   const [currentUser, setCurrentUser] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(true);
   function changeThePassword() {
     setShowPassword((prev) => !prev);
   }
   const [errorMessage, setErrorMessage] = useState("");
-
- 
-
- 
 
   const [formData, setFormData] = useState({
     email: "",
@@ -42,14 +41,24 @@ function LoginsPage() {
     if (formData.password.length < 6) {
       setErrorMessage("Password should be atleast 6 Characters");
     } else {
-      signInWithEmailAndPassword(auth, formData.email, formData.password, formData.userType)
+      setIsLoading(true);
+
+      signInWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password,
+        formData.userType
+      )
         .then(async (userData) => {
           const user = userData.user;
           console.log(user);
 
           if (user) {
             setCurrentUser(user);
-            const docRef = await addDoc(collection(db, "interiorDesiner"), formData);
+            const docRef = await addDoc(
+              collection(db, "interiorDesiner"),
+              formData
+            );
 
             console.log("Wazi 2");
           }
@@ -72,8 +81,9 @@ function LoginsPage() {
 
       if (data[0].userType === "designer") {
         navigate("/formdetails");
-      }else if(data[0].userType === "client"){
+      } else if (data[0].userType === "client") {
         navigate("/designer");
+        setIsLoading(false);
       }
     });
 
@@ -81,6 +91,7 @@ function LoginsPage() {
   }
   return (
     <div className="bg-[#0D47A1] h-[100vh] flex justify-center items-center ">
+      {isLoading && <Loader />}
       <div className="bg-white p-[10em] shadow-xl box-border rounded-xl flex flex-col gap-[2em]">
         <div
           className="border-2  rounded-lg w-full shadow-lg "

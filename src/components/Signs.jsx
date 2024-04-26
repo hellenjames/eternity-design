@@ -6,6 +6,7 @@ import { auth } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
+import Loader from "./Loader";
 
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +17,7 @@ function Signs() {
   const [showPassword, setShowPassword] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [registerSelection, setRegisterSelection] = useState("");
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -63,6 +64,7 @@ function Signs() {
     if (formData.password.length < 6) {
       setErrorMessage("Password should be atleast 6 Characters");
     } else {
+      setIsLoading(true);
       setErrorMessage("");
       createUserWithEmailAndPassword(auth, formData.email, formData.password)
         .then(async (userDetails) => {
@@ -74,6 +76,8 @@ function Signs() {
               formData
             );
             console.log("Document written with ID: ", docRef.id);
+            setIsLoading(false);
+
             navigate("/login");
           }
         })
@@ -87,17 +91,14 @@ function Signs() {
         });
     }
 
-    function handleSave() {
-      setLoading(true)
-  
-      for (let i = 1; i < 20000; i++) {};
-  
-      setLoading(false)
-  
-    }
+    // function handleSave() {
+    //   setLoading(true);
+
+    //   for (let i = 1; i < 20000; i++) {
+    //     setLoading(false);
+    //   }
+    // }
   }
-
-
 
   function handleRegisterSelection(selection) {
     setRegisterSelection(selection);
@@ -105,6 +106,7 @@ function Signs() {
   }
   return (
     <div className="bg-[#0D47A1] h-[100vh] flex justify-center items-center">
+      {isLoading && <Loader />}
       <div className="flex bg-white box-boder shadow-lg p-[50px] rounded-xl">
         <div className="bg-white w-[100%] h-[100]">
           <img src="src/assets/images/signup.jpg" />
@@ -221,9 +223,7 @@ function Signs() {
 
           <div className="flex justify-center ">
             <button
-            disabled={isLoading}
-           
-              onClick={handleRegistration }
+              onClick={handleRegistration}
               className="bg-[#0D47A1] px-[5em] py-5 rounded-[2em] shadow-lg text-white font-bold "
             >
               Create Account
