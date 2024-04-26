@@ -7,7 +7,10 @@ function Nav(){
             <ul className="right flex gap-9 items-center  ">
 
 <Link to="/"> <li className="hidden md:block">Home</li></Link>
+
 <Link to="/login "><li className="hidden md:block">Log In</li></Link>
+<Link to="/login"><li className="hidden md:block">Log In</li></Link>
+
 <Link to="/signup"><li className="hidden md:block">Sign up</li></Link>
             </ul>
         </div>

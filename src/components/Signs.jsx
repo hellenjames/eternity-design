@@ -6,6 +6,7 @@ import { auth } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
+import Loader from "./Loader";
 
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +17,7 @@ function Signs() {
   const [showPassword, setShowPassword] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [registerSelection, setRegisterSelection] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -63,6 +64,7 @@ function Signs() {
     if (formData.password.length < 6) {
       setErrorMessage("Password should be atleast 6 Characters");
     } else {
+      setIsLoading(true);
       setErrorMessage("");
       createUserWithEmailAndPassword(auth, formData.email, formData.password)
         .then(async (userDetails) => {
@@ -74,6 +76,8 @@ function Signs() {
               formData
             );
             console.log("Document written with ID: ", docRef.id);
+            setIsLoading(false);
+
             navigate("/login");
           }
         })
@@ -86,6 +90,14 @@ function Signs() {
           }
         });
     }
+
+    // function handleSave() {
+    //   setLoading(true);
+
+    //   for (let i = 1; i < 20000; i++) {
+    //     setLoading(false);
+    //   }
+    // }
   }
 
   function handleRegisterSelection(selection) {
@@ -93,12 +105,18 @@ function Signs() {
     setFormData((prev) => ({ ...prev, userType: selection }));
   }
   return (
+
     <>
     <div className="w-[50vw] h-[90vh] bg-[#0D47A1] absolute -z-10 right-0"></div>
     <div className=" h-[100vh] flex justify-center items-center shadow-[0_0_5px_lightgray] z-10">
       <div className="flex bg-white box-boder p-[50px] rounded-xl">
       <div className="flex justify-center text-center text-5xl text-[#0D47A1]">Sign Up</div>
        
+
+    <div className="bg-[#0D47A1] h-[100vh] flex justify-center items-center">
+      {isLoading && <Loader />}
+      <div className="flex bg-white box-boder shadow-lg p-[50px] rounded-xl">
+
         <div className="bg-white w-[100%] h-[100]">
           <img src="src/assets/images/signup.jpg" />
         </div>
