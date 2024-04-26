@@ -1,4 +1,12 @@
 import { Link } from "react-router-dom";
+import { BiLogoFacebookCircle } from "react-icons/bi";
+import { BiLogoLinkedin } from "react-icons/bi";
+import { BsTwitterX } from "react-icons/bs";
+import { GrInstagram } from "react-icons/gr";
+
+
+
+
 function Footer() {
   return (
     <footer className="shadow-[0_0_8px_lightgray]">
@@ -40,10 +48,20 @@ function Footer() {
               <li>Commercial Spaces</li>
             </ul>
           </div>
-          <div>
+          <div >
             <h2 className="font-bold text-[#0D47A1]">Contact Us</h2>
             <p>+254756497676</p>
             <p>design@eternityinteriors.co.ke</p>
+            <div className="flex gap-6">
+            <BiLogoFacebookCircle className="size-7" />
+            <BiLogoLinkedin  className="size-7" />
+            <BsTwitterX className="size-6" />
+            <GrInstagram className="size-6" />
+            </div>
+
+
+
+
           </div>
         </div>
       </div>

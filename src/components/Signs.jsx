@@ -176,6 +176,7 @@ function Signs() {
               onChange={handleChange}
             />
           </div>
+          </div>
 <label>Register as:</label>
           <div className="flex w-full gap-7">
             
@@ -248,6 +249,7 @@ function Signs() {
           </div>
         </div>
       </div>
+    </div>
     </div>
     </>
   );

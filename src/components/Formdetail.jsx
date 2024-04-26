@@ -1,6 +1,6 @@
 import { getStorage, ref, uploadString } from "firebase/storage";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../firebase";
+import { db, storage } from "../firebase";
 import { useState } from "react";
 function Formdetail() {
   const [registerValidation, setRegisterValidation] = useState("");
@@ -15,7 +15,6 @@ function Formdetail() {
     imageDisplay: "",
   });
   function handleChangeImage(e, imageType) {
-    const storage = getStorage();
     const files = e.target.files;
     const reader = new FileReader();
 
@@ -26,13 +25,14 @@ function Formdetail() {
 
       reader.onloadend = function () {
         const dataResult = reader.result;
+        console.log("RESULT", reader.result);
+
         uploadString(storageRef, dataResult, "data_url").then((snapshot) => {
           console.log("Uploaded a data_url string!");
           formStorage.logoImage = `https://firebasestorage.googleapis.com/v0/b/eternity-design.appspot.com/o/designers%2F${files[0].name}?alt=media`;
         });
-
-        console.log("RESULT", reader.result);
       };
+      reader.readAsDataURL(files[0]);
     }
 
     if (imageType === "display") {
@@ -48,36 +48,34 @@ function Formdetail() {
         });
         console.log("RESULT", reader.result);
       };
+      reader.readAsDataURL(files[0]);
     }
 
     if (imageType === "multiple") {
-      for (let i = 0; i <= files.length; i++) {
+      console.log(Array.from(files).length)
+
+      const images = [];
+      for (let i = 0; i < Array.from(files).length; i++) {
         const storageRef = ref(storage, `designers/${files[0].name}`);
         reader.onloadend = function () {
           const dataResult = reader.result;
           uploadString(storageRef, dataResult, "data_url").then((snapshot) => {
             console.log("Uploaded a data_url string!");
-            formStorage.projectImages = [
-              ...formStorage.projectImages,
-              `https://firebasestorage.googleapis.com/v0/b/eternity-design.appspot.com/o/designers%2F${files[i].name}?alt=media`,
-            ];
+
+            images.push(
+              `https://firebasestorage.googleapis.com/v0/b/eternity-design.appspot.com/o/designers%2F${files[i].name}?alt=media`
+            );
           });
 
           console.log("RESULT", reader.result);
         };
-        console.log(files[i]);
+        reader.readAsDataURL(files[i]);
       }
+
+
+      setFormStorage({ ...formStorage, projectImages: images });
     }
 
-    reader.onloadend = function () {
-      const dataResult = reader.result;
-      uploadString(storageRef, dataResult, "data_url").then((snapshot) => {
-        console.log("Uploaded a data_url string!");
-        formStorage.image = `https://firebasestorage.googleapis.com/v0/b/eternity-design.appspot.com/o/designers%2F${file.name}?alt=media`;
-      });
-
-      console.log("RESULT", reader.result);
-    };
     // reader.readAsDataURL(file);
   }
 
