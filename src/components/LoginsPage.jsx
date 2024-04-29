@@ -86,7 +86,7 @@ function LoginsPage() {
         })
         .catch((error) => {
           console.log(error);
-          setErrorMessage("Login Faild. Please try again");
+          setErrorMessage("Login Failed. Please try again");
         });
     }
   }
@@ -125,7 +125,7 @@ function LoginsPage() {
               className="flex  items-center text-[20px] cursor-pointer pr-4"
               onClick={changeThePassword}
             >
-              {" "}
+              
               {showPassword ? <LuEye /> : <FaRegEyeSlash />}
             </div>
           </div>
