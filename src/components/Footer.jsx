@@ -19,7 +19,7 @@ function Footer() {
               <img src="src/assets/images/logo.png" width={200} />
             </Link>
             <p className="w-48">
-              As Eternity Designers we are dedicated.
+              As Eternity Design we are dedicated.
             </p>
           </div>
           <div>

@@ -1,6 +1,8 @@
+import { IoLocation } from "react-icons/io5";
+
 function Designereach({ img, name, details,address,companiesName,tags }) {
   return (
-    <div className="bg-slate-200">
+    <div className="bg-slate-200 p-4">
      
       <div className="flex   justify-center mt-4">
         <div>
@@ -10,9 +12,10 @@ function Designereach({ img, name, details,address,companiesName,tags }) {
       <div className="flex-col gap-3 items-center">
         <p className="text-center">{name}</p>
         <p className="text-center">{details}</p>
-        <p className="text-center">{companiesName}</p>
+        <p className="text-center text-4xl text-[#0D47A1]">{companiesName}</p>
       </div>
-      <div> <p className="flex justify-center">Location:{address}</p></div>
+      <div> <p className="flex justify-center"><IoLocation size={20}/>
+:{address}</p></div>
       <div className="flex gap-3 text-[#0D47A1] font-bold my-3 ">
        
        {

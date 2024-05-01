@@ -22,27 +22,27 @@ function Designers() {
     const querySnapshot = await getDocs(collection(db, "designers"));
     querySnapshot.forEach((doc) => {
       console.log(doc.data());
-      setDisplay([ ...display, doc.data() ]);
+      setDisplay((prev) => [...prev, doc.data()]);
     });
   }
-
 
   return (
     <>
       <div className="flex-wrap container mx-auto">
-        {
-          console.log(display)
-        }
+        {console.log(display)}
         <div className="flex gap-7">
-          {
-            display.map(item=>{
-              return (
-                <Designereach img={item.logoImage} name={item.name} details={item.details} address={item.address} companiesName={item.companiesName}tags={item.tags}/>
-              )
-              
-              
-            })
-          }
+          {display.map((item) => {
+            return (
+              <Designereach
+                img={item.logoImage}
+                name={item.name}
+                details={item.details}
+                address={item.address}
+                companiesName={item.companiesName}
+                tags={item.tags}
+              />
+            );
+          })}
         </div>
       </div>
     </>

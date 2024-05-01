@@ -65,12 +65,11 @@ function LoginsPage() {
             );
 
             getDocs(q).then((qSnap) => {
-              
               const data = qSnap.docs.map((d) => ({ id: d.id, ...d.data() }));
-              console.log(data)
+              console.log(data);
               setCurrentUser(data[0]);
-              const {password,...others} = data[0];
-              localStorage.setItem("user",JSON.stringify(others));
+              const { password, ...others } = data[0];
+              localStorage.setItem("user", JSON.stringify(others));
               console.log(data[0]);
 
               if (data && data[0].userType === "designer") {
@@ -89,14 +88,13 @@ function LoginsPage() {
         .catch((error) => {
           console.log(error);
           setErrorMessage("Login Failed. Please try again");
-          setIsLoading(false)
+          setIsLoading(false);
         });
     }
   }
 
   return (
     <>
-      {/* {console.log(currentUser)} */}
       <div className="bg-[#0D47A1] h-[100vh] flex justify-center items-center ">
         {isLoading && <Loader />}
         <div className="bg-white p-[10em] shadow-xl box-border rounded-xl flex flex-col gap-[2em]">
@@ -128,7 +126,6 @@ function LoginsPage() {
               className="flex  items-center text-[20px] cursor-pointer pr-4"
               onClick={changeThePassword}
             >
-              
               {showPassword ? <LuEye /> : <FaRegEyeSlash />}
             </div>
           </div>
@@ -151,10 +148,6 @@ function LoginsPage() {
               Log in
             </a>
           </div>
-          {/* <div className="w-full flex items-center justify-center relative">
-          <div className="w-full h-[1px] bg-black"></div>
-          <p className=" text-base absolute text-black/80 bg-white">OR</p>
-        </div> */}
           <div className="flex justify-center  text-[20px] my-2">
             Dont Have An Account Yet?
             <a href="/signup" className="text-[#0D47A1]">
