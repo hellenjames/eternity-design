@@ -65,7 +65,9 @@ function LoginsPage() {
             );
 
             getDocs(q).then((qSnap) => {
+              
               const data = qSnap.docs.map((d) => ({ id: d.id, ...d.data() }));
+              console.log(data)
               setCurrentUser(data[0]);
               const {password,...others} = data[0];
               localStorage.setItem("user",JSON.stringify(others));
@@ -87,13 +89,14 @@ function LoginsPage() {
         .catch((error) => {
           console.log(error);
           setErrorMessage("Login Failed. Please try again");
+          setIsLoading(false)
         });
     }
   }
 
   return (
     <>
-      {console.log(currentUser)}
+      {/* {console.log(currentUser)} */}
       <div className="bg-[#0D47A1] h-[100vh] flex justify-center items-center ">
         {isLoading && <Loader />}
         <div className="bg-white p-[10em] shadow-xl box-border rounded-xl flex flex-col gap-[2em]">

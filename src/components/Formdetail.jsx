@@ -2,6 +2,7 @@ import { getStorage, ref, uploadString } from "firebase/storage";
 import { collection, addDoc } from "firebase/firestore";
 import { db, storage } from "../firebase";
 import { useState } from "react";
+import loader from "../assets/images/loader.gif";
 function Formdetail() {
   const [registerValidation, setRegisterValidation] = useState("");
   const [formStorage, setFormStorage] = useState({
@@ -14,6 +15,17 @@ function Formdetail() {
     projectImages: [],
     imageDisplay: "",
   });
+
+  const [isLoading, setIsLoading] = useState({
+    logo: false,
+    display: false,
+    projects: false,
+  });
+
+  let logoImg;
+  let displayImg;
+  const images = [];
+
   function handleChangeImage(e, imageType) {
     const files = e.target.files;
     const reader = new FileReader();
@@ -29,7 +41,10 @@ function Formdetail() {
 
         uploadString(storageRef, dataResult, "data_url").then((snapshot) => {
           console.log("Uploaded a data_url string!");
-          formStorage.logoImage = `https://firebasestorage.googleapis.com/v0/b/eternity-design.appspot.com/o/designers%2F${files[0].name}?alt=media`;
+          setFormStorage({
+            ...formStorage,
+            logoImage: `https://firebasestorage.googleapis.com/v0/b/eternity-design.appspot.com/o/designers%2F${files[0].name}?alt=media`,
+          });
         });
       };
       reader.readAsDataURL(files[0]);
@@ -52,13 +67,15 @@ function Formdetail() {
     }
 
     if (imageType === "multiple") {
-      console.log(Array.from(files).length)
+      console.log(Array.from(files).length);
 
-      const images = [];
       for (let i = 0; i < Array.from(files).length; i++) {
+        const reader = new FileReader();
+        console.log(files[i]);
         const storageRef = ref(storage, `designers/${files[0].name}`);
         reader.onloadend = function () {
           const dataResult = reader.result;
+
           uploadString(storageRef, dataResult, "data_url").then((snapshot) => {
             console.log("Uploaded a data_url string!");
 
@@ -72,8 +89,7 @@ function Formdetail() {
         reader.readAsDataURL(files[i]);
       }
 
-
-      setFormStorage({ ...formStorage, projectImages: images });
+      setFormStorage({ ...formStorage, projectImages, imageDisplay: images });
     }
 
     // reader.readAsDataURL(file);
@@ -179,9 +195,7 @@ function Formdetail() {
         </div>
         <p className="text-red-400">{registerValidation}</p>
         <div>
-          <h2 className="underline underline-offset-2">
-            Upload Companies Logo:
-          </h2>
+          <h2 className="underline underline-offset-2">Upload Company Logo:</h2>
           <input
             type="file"
             placeholder="file"
@@ -189,6 +203,10 @@ function Formdetail() {
             onChange={(e) => handleChangeImage(e, "logo")}
             name="logoImage"
           />
+          {isLoading.logo && loader}
+          {formStorage.logoImage && (
+            <img src={formStorage.logoImage} width={100} />
+          )}
         </div>
         <div>
           <h2 className="underline underline-offset-2">
@@ -202,6 +220,10 @@ function Formdetail() {
             name="projectImages"
             multiple
           />
+          {isLoading.projects && loader}
+          {/* {
+            formStorage.projectImages.map && <img src={formStorage.projectImages}/>
+          } */}
         </div>
         <div>
           <h2 className="underline underline-offset-2">
@@ -214,6 +236,10 @@ function Formdetail() {
             onChange={(e) => handleChangeImage(e, "display")}
             name="imageDisplay"
           />
+          {isLoading.display && loader}
+          {formStorage.imageDisplay && (
+            <img src={formStorage.imageDisplay} width={100} />
+          )}
         </div>
 
         <div className="flex justify-center ">

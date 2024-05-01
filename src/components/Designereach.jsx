@@ -1,9 +1,7 @@
-function Designereach({ img, name, details }) {
+function Designereach({ img, name, details,address,companiesName,tags }) {
   return (
     <div className="bg-slate-200">
-      <div className="flex justify-center">
-        <img className="" src="src/assets/images/Design Logo.png" width={100} />
-      </div>
+     
       <div className="flex   justify-center mt-4">
         <div>
           <img src={img} width={200} />
@@ -12,14 +10,19 @@ function Designereach({ img, name, details }) {
       <div className="flex-col gap-3 items-center">
         <p className="text-center">{name}</p>
         <p className="text-center">{details}</p>
+        <p className="text-center">{companiesName}</p>
       </div>
-      <div> <p className="flex justify-center">Location:Nairobi</p></div>
+      <div> <p className="flex justify-center">Location:{address}</p></div>
       <div className="flex gap-3 text-[#0D47A1] font-bold my-3 ">
        
-        <p className="border rounded-xl py-1 px-3 bg-[#0D47A1] text-white">Weddings</p>
-        <p className="border rounded-xl py-1 px-3 bg-[#0D47A1] text-white">Graduations</p>
-        <p className="border rounded-xl py-1 px-3 bg-[#0D47A1] text-white">Offices</p>
-        <p className="border rounded-xl py-1 px-3 bg-[#0D47A1] text-white">Hotels</p> 
+       {
+        tags.split(",").map(item=>{
+          return (
+            <p className="border rounded-xl py-1 px-3 bg-[#0D47A1] text-white">{item}</p>
+
+          )
+        })
+       }
       </div>
     </div>
   );
