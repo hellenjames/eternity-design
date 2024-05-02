@@ -20,10 +20,7 @@ function Formdetail() {
     const reader = new FileReader();
 
     if (imageType === "logo") {
-      console.log("logo");
-
       const storageRef = ref(storage, `designers/${files[0].name}`);
-
       reader.onloadend = function () {
         const dataResult = reader.result;
         uploadString(storageRef, dataResult, "data_url").then((snapshot) => {
@@ -36,10 +33,7 @@ function Formdetail() {
     }
 
     if (imageType === "display") {
-      console.log("display");
-
       const storageRef = ref(storage, `designers/${files[0].name}`);
-
       reader.onloadend = function () {
         const dataResult = reader.result;
         uploadString(storageRef, dataResult, "data_url").then((snapshot) => {
@@ -65,20 +59,11 @@ function Formdetail() {
 
           console.log("RESULT", reader.result);
         };
-        console.log(files[i]);
+        // console.log(files[i]);
       }
     }
 
-    reader.onloadend = function () {
-      const dataResult = reader.result;
-      uploadString(storageRef, dataResult, "data_url").then((snapshot) => {
-        console.log("Uploaded a data_url string!");
-        formStorage.image = `https://firebasestorage.googleapis.com/v0/b/eternity-design.appspot.com/o/designers%2F${file.name}?alt=media`;
-      });
-
-      console.log("RESULT", reader.result);
-    };
-    // reader.readAsDataURL(file);
+    
   }
 
   function handleStorageData(e) {
@@ -111,6 +96,7 @@ function Formdetail() {
     if (formStorage.imageDisplay === "") {
       setRegisterValidation("Kindly upload all images");
     } else {
+      setRegisterValidation("");
       const docRef = await addDoc(collection(db, "designers"), formStorage);
       console.log("Document written with ID: ", docRef.id);
       if (docRef.id) {

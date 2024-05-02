@@ -9,7 +9,7 @@ import Formdetails from "../pages/Formdetails";
 
 import Designer from "../pages/Designer";
 import Rocky from "../pages/Rocky";
-
+import Payments from "../pages/Payments";
 
 function Router() {
   return (
@@ -57,24 +57,30 @@ function Router() {
           }
         ></Route>
 
-          <Route
+        <Route
           path="/designer"
           element={
             <Layout>
-              <Designer/>
+              <Designer />
             </Layout>
           }
-          />
-            <Route
-            path="/rocky"
-            element={
-              <Layout>
-                <Rocky/>
-              </Layout>
-            }>
-
-        </Route>
-
+        />
+        <Route
+          path="/rocky"
+          element={
+            <Layout>
+              <Rocky />
+            </Layout>
+          }
+        />
+        <Route
+          path="/payments"
+          element={
+            <Layout>
+              <Payments />
+            </Layout>
+          }
+        ></Route>
       </Routes>
     </BrowserRouter>
   );
