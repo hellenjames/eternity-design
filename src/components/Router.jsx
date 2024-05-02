@@ -82,6 +82,8 @@ function Router() {
           }
         />
 
+       
+
         <Route
           path="/designers/:id"
           element={
