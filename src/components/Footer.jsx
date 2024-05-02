@@ -13,7 +13,7 @@ function Footer() {
       <div className="py-1">
       <div className="container mx-auto">
         
-        <div className="flex justify-between my-5 leading-[2.5]">
+        <div className="flex flex-wrap justify-between my-5 leading-[2.5]">
           <div>
             <Link to="/">
               <img src="src/assets/images/logo.png" width={200} />

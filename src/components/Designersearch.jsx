@@ -2,7 +2,6 @@ import { useState,useContext } from "react";
 import { EternityContext } from "../context/state";
 function Designersearch() {
   const { searchKeyword, setSearchKeyword } = useContext(EternityContext);
-
   return (
     <div className="container mx-auto flex justify-center w-[100%]">
       <div className="flex items-center   border border-[#0D47A1] rounded-full px-5 gap-3 mt-6 w-[50%] mx-auto justify-between py-1 mb-[5em]">
@@ -23,6 +22,7 @@ function Designersearch() {
               setSearchKeyword((prev) => ({ ...prev, tag: e.target.value }))
             }
           >
+
             <option disabled selected>
               Filter by Tag
             </option>

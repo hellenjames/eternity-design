@@ -66,7 +66,7 @@ function Router() {
           }
           />
             <Route
-            path="/rocky"
+            path="/designers/:id"
             element={
               <Layout>
                 <Rocky/>
