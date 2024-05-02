@@ -1,25 +1,39 @@
-function Designereach({ img, name, details }) {
+import { IoLocation } from "react-icons/io5";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+function Designereach({ img, name, details, address, companiesName, tags }) {
+  const navigate = useNavigate();
+  function handleSingleDesigner(path, options) {
+    navigate(path, options);
+  }
   return (
-    <div className="bg-slate-200">
-      <div className="flex justify-center">
-        <img className="" src="src/assets/images/Design Logo.png" width={100} />
-      </div>
+    <div className="bg-slate-200 p-4 cursor-pointer" onClick={handleSingleDesigner}>
       <div className="flex   justify-center mt-4">
         <div>
+          {`/designers/${companiesName}`}{" "}
           <img src={img} width={200} />
         </div>
       </div>
       <div className="flex-col gap-3 items-center">
         <p className="text-center">{name}</p>
         <p className="text-center">{details}</p>
+        <p className="text-center text-4xl text-[#0D47A1]">{companiesName}</p>
       </div>
-      <div> <p className="flex justify-center">Location:Nairobi</p></div>
+      <div>
+        
+        <p className="flex justify-center">
+          <IoLocation size={20} />:{address}
+        </p>
+      </div>
       <div className="flex gap-3 text-[#0D47A1] font-bold my-3 ">
-       
-        <p className="border rounded-xl py-1 px-3 bg-[#0D47A1] text-white">Weddings</p>
-        <p className="border rounded-xl py-1 px-3 bg-[#0D47A1] text-white">Graduations</p>
-        <p className="border rounded-xl py-1 px-3 bg-[#0D47A1] text-white">Offices</p>
-        <p className="border rounded-xl py-1 px-3 bg-[#0D47A1] text-white">Hotels</p> 
+        {tags.split(",").map((item) => {
+          return (
+            <p className="border rounded-xl py-1 px-3 bg-[#0D47A1] text-white">
+              {item}
+            </p>
+          );
+        })}
       </div>
     </div>
   );

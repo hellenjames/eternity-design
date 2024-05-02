@@ -11,34 +11,15 @@ function Rockyinfo() {
           Book Rocky
         </button>
         <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur
-          architecto repellendus atque ducimus omnis, dolorum quibusdam quod
-          quidem, suscipit enim consequatur animi rem corrupti expedita
-          excepturi et, ratione eum. Pariatur! Perferendis impedit, eligendi
-          nisi, nostrum tempore fugiat suscipit iure saepe autem omnis neque hic
-          harum eveniet! Atque quos sit architecto magni doloremque quod nihil
-          voluptatum. Modi inventore tempora placeat cupiditate. Distinctio
-          itaque sequi quam quas ipsum quae perferendis dolorum quo voluptatem,
-          error molestias laboriosam dignissimos repudiandae accusamus sapiente,
-          vero voluptatibus quis enim, neque nesciunt rerum. Repudiandae ut
-          numquam quis molestias. At commodi sequi aut ullam explicabo deleniti
-          doloremque illo cum fuga eligendi quibusdam nostrum qui delectus error
-          nobis possimus recusandae dolorem sint quas est maxime, veritatis
-          labore. Quaerat, vero adipisci? Cum dignissimos temporibus magnam
-          quidem, suscipit doloribus velit. Quod voluptatem architecto aut,
-          voluptate rerum nihil harum ipsam et sed recusandae veritatis labore
-          praesentium assumenda ab quisquam quidem alias nemo voluptatum.
-          Officia esse voluptatibus saepe cumque consequuntur quod similique
-          ipsam eius odit soluta expedita quibusdam distinctio ad dolorem,
-          deleniti repellat asperiores necessitatibus nostrum rem, ipsum
-          tempore! Explicabo eligendi ipsam rem ipsa. Quam corrupti, qui rem
-          eaque ducimus sit? Fugiat facilis et cupiditate culpa cumque possimus
-          commodi blanditiis facere? Minima, voluptate debitis reprehenderit,
-          earum dicta pariatur delectus quaerat perferendis, quis enim
-          explicabo? Amet non, ex accusamus dignissimos eaque quidem, quisquam
-          sunt aliquam quos, commodi voluptates? Omnis ea reprehenderit
-          temporibus voluptate laudantium provident est minus soluta, quisquam
-          dolores odio optio sint rerum alias.
+        The idea for Rocky Design Company began with the notion that customers deserved high-quality, immersive experiences when making major purchases for the home; a true "what-you-see-is-what-you-get" experience that would be easy for retailers and manufacturers to deliver without breaking the bank. As the word "home" helps form a key part of our name, that value still holds true over 5 years later.
+
+
+Our commitment to innovation has led to a wide range of solutions that utilize powerful, unique technologies to visualize the experience of choice for the consumer, enabling them to realize their dreams for their home more vividly and accurately than ever before; and branching out into numerous exciting applications that improve the way businesses work on a fundamental level.
+
+
+The world of commerce continues to move online at lighting speed, and as a corporation that has long held this vision, we are uniquely situated to help enable retailers, manufacturers, professional designers, and more to take that leap–and we know from experience that they will be thrilled with the results.
+
+
         </p>
         <p className="text-[#0D47A1] font-bold"> Previous Work</p>
       </div>

@@ -107,17 +107,16 @@ function Signs() {
   return (
 
     <>
-    <div className="w-[50vw] h-[90vh] bg-[#0D47A1] absolute -z-10 right-0"></div>
-    <div className=" h-[100vh] flex justify-center items-center shadow-[0_0_5px_lightgray] z-10">
-      <div className="flex bg-white box-boder p-[50px] rounded-xl">
-      <div className="flex justify-center text-center text-5xl text-[#0D47A1]">Sign Up</div>
-       
+    <div className="w-[50vw] h-[100%] bg-[#0D47A1] absolute -z-10 right-0"></div>
+    <div className=" flex justify-center items-center shadow-[0_0_5px_lightgray] z-10">
+             
 
-    <div className="bg-[#0D47A1] h-[100vh] flex justify-center items-center">
+    <div className=" flex flex-col gap-5">
       {isLoading && <Loader />}
-      <div className="flex bg-white box-boder shadow-lg p-[50px] rounded-xl">
+      <h1 className="text-right text-5xl pr-[3em]">Create Account</h1>
+      <div className="flex bg-white box-boder shadow-[0_0_5px_lightgray] p-[50px] rounded-xl mb-[6em]">
 
-        <div className="bg-white w-[100%] h-[100]">
+        <div className="bg-white w-[100%]">
           <img src="src/assets/images/signup.jpg" />
         </div>
         <div className="flex flex-col gap-5 ">
@@ -176,6 +175,7 @@ function Signs() {
               onChange={handleChange}
             />
           </div>
+          {/* </div> */}
 <label>Register as:</label>
           <div className="flex w-full gap-7">
             
@@ -246,8 +246,10 @@ function Signs() {
               Log in
             </a>
           </div>
+          </div>
         </div>
       </div>
+    {/* </div> */}
     </div>
     </>
   );

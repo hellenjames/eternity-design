@@ -17,27 +17,17 @@ function Testimonials() {
           name="Etern Desn"
           details="Am a client who wanted an interior designer that could help
                     in finishing up of my house. I had nice experience with
-                    Eternity Design services .They were able to connect me with
-                    the designer which made my work more easier and it was done
-                    perfect more than i had expected."
+                    Eternity Design services ."
         />
         <Testimonial
           img={img4}
           name="Desn Estern"
-          details="Am a client who wanted an interior designer that could help
-                    in finishing up of my house. I had nice experience with
-                    Eternity Design services .They were able to connect me with
-                    the designer which made my work more easier and it was done
-                    perfect more than i had expected."
+          details="I really needed a designer that could help in finishing up my hotel.And through the app i really got my problem solved.And the work was well done."
         />
         <Testimonial
           img={img1}
           name="Connie Hellie"
-          details="Am a client who wanted an interior designer that could help
-                    in finishing up of my house. I had nice experience with
-                    Eternity Design services .They were able to connect me with
-                    the designer which made my work more easier and it was done
-                    perfect more than i had expected."
+          details="Through Eternity design i was able to get assisted to the need that i needed and i can also reccommend any other person that's need help."
         />
       </div>
     </div>
