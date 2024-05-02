@@ -107,11 +107,45 @@ function Signs() {
 
   return (
     <>
+
       <div className="bg-[#0D47A1] h-[100vh] flex justify-center items-center">
         {isLoading && <Loader />}
         <div className="flex bg-white box-boder shadow-lg p-[50px] rounded-xl ">
           <div className="bg-white w-[100%] h-[100]">
             <img src="src/assets/images/signup.jpg" />
+
+    <div className="w-[50vw] h-[100%] bg-[#0D47A1] absolute -z-10 right-0"></div>
+    <div className=" flex justify-center items-center shadow-[0_0_5px_lightgray] z-10">
+             
+
+    <div className=" flex flex-col gap-5">
+      {isLoading && <Loader />}
+      <h1 className="text-right text-5xl pr-[3em]">Create Account</h1>
+      <div className="flex bg-white box-boder shadow-[0_0_5px_lightgray] p-[50px] rounded-xl mb-[6em]">
+
+        <div className="bg-white w-[100%]">
+          <img src="src/assets/images/signup.jpg" />
+        </div>
+        <div className="flex flex-col gap-5 ">
+          <div className="border-2  rounded-lg w-full shadow-lg">
+            <input
+              type="text"
+              placeholder="Full Name"
+              className=" py-5 pr-[20em] px-2 bg-transparent outline-none flex-1 "
+              name="fullName"
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="border-2  rounded-lg w-full shadow-lg">
+            <input
+              type="text"
+              placeholder="Email"
+              className=" py-5 pr-[20em] px-2 bg-transparent outline-none flex-1 "
+              name="email"
+              onChange={handleChange}
+            />
+
           </div>
           <div className="flex flex-col gap-5 ">
             <div className="border-2  rounded-lg w-full shadow-lg">
@@ -144,6 +178,7 @@ function Signs() {
               />
             </div>
 
+
             <div className="border-2  rounded-lg  shadow-lg flex">
               <input
                 type={showPassword ? "password" : "text"}
@@ -155,6 +190,31 @@ function Signs() {
               <div
                 className="flex  items-center text-[20px] cursor-pointer pr-4"
                 onClick={changeThePassword}
+
+          </div>
+          <div className="border-2  rounded-lg w-full shadow-lg">
+            <input
+              type={showPassword ? "password" : "text"}
+              placeholder="Confirm Passsword"
+              className=" py-5 pr-[20em] px-2 bg-transparent outline-none flex-1 "
+              name="confirmPassword"
+              onChange={handleChange}
+            />
+          </div>
+          {/* </div> */}
+<label>Register as:</label>
+          <div className="flex w-full gap-7">
+            
+            <div className="flex-1">
+              <label
+                onClick={() => handleRegisterSelection("designer")}
+                htmlFor="designer"
+                className="bg-[#4c87e0] flex gap-4 justify-center items-center py-[1em] cursor-pointer hover:bg-[#0D47A1]"
+                style={{
+                  backgroundColor:
+                    registerSelection === "designer" ? "#0D47A1" : "#4c87e0",
+                }}
+
               >
                 {" "}
                 {showPassword ? <LuEye /> : <FaRegEyeSlash />}
@@ -238,8 +298,15 @@ function Signs() {
           </div>
           </div>
 
+
         </div>
       </div>
+
+        </div>
+      </div>
+    {/* </div> */}
+    </div>
+
     </>
   );
 }

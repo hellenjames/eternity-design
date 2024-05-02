@@ -1,7 +1,8 @@
 import { getStorage, ref, uploadString } from "firebase/storage";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../firebase";
+import { db, storage } from "../firebase";
 import { useState } from "react";
+import loader from "../assets/images/loader.gif";
 function Formdetail() {
   const [registerValidation, setRegisterValidation] = useState("");
   const [formStorage, setFormStorage] = useState({
@@ -14,8 +15,18 @@ function Formdetail() {
     projectImages: [],
     imageDisplay: "",
   });
+
+  const [isLoading, setIsLoading] = useState({
+    logo: false,
+    display: false,
+    projects: false,
+  });
+
+  let logoImg;
+  let displayImg;
+  const images = [];
+
   function handleChangeImage(e, imageType) {
-    const storage = getStorage();
     const files = e.target.files;
     const reader = new FileReader();
 
@@ -23,13 +34,17 @@ function Formdetail() {
       const storageRef = ref(storage, `designers/${files[0].name}`);
       reader.onloadend = function () {
         const dataResult = reader.result;
+        console.log("RESULT", reader.result);
+
         uploadString(storageRef, dataResult, "data_url").then((snapshot) => {
           console.log("Uploaded a data_url string!");
-          formStorage.logoImage = `https://firebasestorage.googleapis.com/v0/b/eternity-design.appspot.com/o/designers%2F${files[0].name}?alt=media`;
+          setFormStorage({
+            ...formStorage,
+            logoImage: `https://firebasestorage.googleapis.com/v0/b/eternity-design.appspot.com/o/designers%2F${files[0].name}?alt=media`,
+          });
         });
-
-        console.log("RESULT", reader.result);
       };
+      reader.readAsDataURL(files[0]);
     }
 
     if (imageType === "display") {
@@ -42,28 +57,42 @@ function Formdetail() {
         });
         console.log("RESULT", reader.result);
       };
+      reader.readAsDataURL(files[0]);
     }
 
     if (imageType === "multiple") {
-      for (let i = 0; i <= files.length; i++) {
+      console.log(Array.from(files).length);
+
+      for (let i = 0; i < Array.from(files).length; i++) {
+        const reader = new FileReader();
+        console.log(files[i]);
         const storageRef = ref(storage, `designers/${files[0].name}`);
         reader.onloadend = function () {
           const dataResult = reader.result;
+
           uploadString(storageRef, dataResult, "data_url").then((snapshot) => {
             console.log("Uploaded a data_url string!");
-            formStorage.projectImages = [
-              ...formStorage.projectImages,
-              `https://firebasestorage.googleapis.com/v0/b/eternity-design.appspot.com/o/designers%2F${files[i].name}?alt=media`,
-            ];
+
+            images.push(
+              `https://firebasestorage.googleapis.com/v0/b/eternity-design.appspot.com/o/designers%2F${files[i].name}?alt=media`
+            );
           });
 
           console.log("RESULT", reader.result);
         };
+
         // console.log(files[i]);
+
+        reader.readAsDataURL(files[i]);
+
       }
+
+
+      setFormStorage({ ...formStorage, projectImages, imageDisplay: images });
     }
 
-    
+    // reader.readAsDataURL(file);
+
   }
 
   function handleStorageData(e) {
@@ -167,9 +196,7 @@ function Formdetail() {
         </div>
         <p className="text-red-400">{registerValidation}</p>
         <div>
-          <h2 className="underline underline-offset-2">
-            Upload Companies Logo:
-          </h2>
+          <h2 className="underline underline-offset-2">Upload Company Logo:</h2>
           <input
             type="file"
             placeholder="file"
@@ -177,6 +204,10 @@ function Formdetail() {
             onChange={(e) => handleChangeImage(e, "logo")}
             name="logoImage"
           />
+          {isLoading.logo && loader}
+          {formStorage.logoImage && (
+            <img src={formStorage.logoImage} width={100} />
+          )}
         </div>
         <div>
           <h2 className="underline underline-offset-2">
@@ -190,6 +221,10 @@ function Formdetail() {
             name="projectImages"
             multiple
           />
+          {isLoading.projects && loader}
+          {/* {
+            formStorage.projectImages.map && <img src={formStorage.projectImages}/>
+          } */}
         </div>
         <div>
           <h2 className="underline underline-offset-2">
@@ -202,6 +237,10 @@ function Formdetail() {
             onChange={(e) => handleChangeImage(e, "display")}
             name="imageDisplay"
           />
+          {isLoading.display && loader}
+          {formStorage.imageDisplay && (
+            <img src={formStorage.imageDisplay} width={100} />
+          )}
         </div>
 
         <div className="flex justify-center ">
