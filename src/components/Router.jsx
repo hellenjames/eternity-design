@@ -65,14 +65,14 @@ function Router() {
             </Layout>
           }
         />
-        <Route
+        {/* <Route
           path="/rocky"
           element={
             <Layout>
               <Rocky />
             </Layout>
           }
-        />
+        /> */}
         <Route
           path="/payments"
           element={
@@ -82,14 +82,7 @@ function Router() {
           }
         />
 
-        <Route
-          path="/designers/:id"
-          element={
-            <Layout>
-              <Rocky />
-            </Layout>
-          }
-        />
+       
 
         <Route
           path="/designers/:id"
