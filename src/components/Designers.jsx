@@ -49,6 +49,8 @@ function Designers() {
                     address={item.address}
                     companiesName={item.companiesName}
                     tags={item.tags}
+                    description={item.description}
+                    
                   />
                 );
               }

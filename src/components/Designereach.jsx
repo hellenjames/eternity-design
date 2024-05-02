@@ -1,17 +1,21 @@
 import { IoLocation } from "react-icons/io5";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Loader from "./Loader";
 
-function Designereach({ img, name, details, address, companiesName, tags }) {
+function Designereach({ img, name,description, details, address, companiesName, tags }) {
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
   function handleSingleDesigner(path, options) {
     navigate(path, options);
+
   }
   return (
-    <div className="bg-slate-200 p-4 cursor-pointer" onClick={handleSingleDesigner}>
+    <div className="bg-slate-200 p-4 cursor-pointer" onClick={()=>handleSingleDesigner(`/designers/${companiesName}`, {state:{img,description ,name, details, address, companiesName, tags}})}>
       <div className="flex   justify-center mt-4">
         <div>
-          {`/designers/${companiesName}`}{" "}
           <img src={img} width={200} />
         </div>
       </div>
@@ -20,7 +24,7 @@ function Designereach({ img, name, details, address, companiesName, tags }) {
         <p className="text-center">{details}</p>
         <p className="text-center text-4xl text-[#0D47A1]">{companiesName}</p>
       </div>
-      <div>
+      <div>,,
         
         <p className="flex justify-center">
           <IoLocation size={20} />:{address}

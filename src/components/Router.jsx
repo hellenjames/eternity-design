@@ -65,14 +65,14 @@ function Router() {
             </Layout>
           }
         />
-        <Route
+        {/* <Route
           path="/rocky"
           element={
             <Layout>
               <Rocky />
             </Layout>
           }
-        />
+        /> */}
         <Route
           path="/payments"
           element={
