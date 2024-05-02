@@ -81,9 +81,9 @@ function Router() {
               <Payments />
             </Layout>
           }
-        ></Route>
+        />
 
-          />
+        
             <Route
             path="/designers/:id"
             element={
