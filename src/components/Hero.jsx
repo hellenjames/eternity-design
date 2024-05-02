@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Aboutus from "./Aboutus";
 function Hero() {
   return (
-    <section >
+    <section>
       <div className="   flex flex-col gap-3 bg-[linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)),url('./src/assets/images/Home-Decor-Sim-Boon-Yang-BT20210924-XSA-015-00hero.avif')] h-[80vh] bg-no-repeat bg-cover justify-center" alt="hero">
         <div className="container mx-auto flex flex-col gap-2 justify-center">
           <h1 className=" text-[white] text-[4rem] font-bold ">
