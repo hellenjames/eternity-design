@@ -31,10 +31,7 @@ function Formdetail() {
     const reader = new FileReader();
 
     if (imageType === "logo") {
-      console.log("logo");
-
       const storageRef = ref(storage, `designers/${files[0].name}`);
-
       reader.onloadend = function () {
         const dataResult = reader.result;
         console.log("RESULT", reader.result);
@@ -51,10 +48,7 @@ function Formdetail() {
     }
 
     if (imageType === "display") {
-      console.log("display");
-
       const storageRef = ref(storage, `designers/${files[0].name}`);
-
       reader.onloadend = function () {
         const dataResult = reader.result;
         uploadString(storageRef, dataResult, "data_url").then((snapshot) => {
@@ -86,13 +80,19 @@ function Formdetail() {
 
           console.log("RESULT", reader.result);
         };
+
+        // console.log(files[i]);
+
         reader.readAsDataURL(files[i]);
+
       }
+
 
       setFormStorage({ ...formStorage, projectImages, imageDisplay: images });
     }
 
     // reader.readAsDataURL(file);
+
   }
 
   function handleStorageData(e) {
@@ -125,6 +125,7 @@ function Formdetail() {
     if (formStorage.imageDisplay === "") {
       setRegisterValidation("Kindly upload all images");
     } else {
+      setRegisterValidation("");
       const docRef = await addDoc(collection(db, "designers"), formStorage);
       console.log("Document written with ID: ", docRef.id);
       if (docRef.id) {

@@ -6,10 +6,13 @@ import { useNavigate } from "react-router-dom";
 function Nav() {
   const { currentUser, setCurrentUser } = useContext(EternityContext);
 
+
+<Link to="/login "><li className="hidden md:block">Log In</li></Link>
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     setCurrentUser(user);
   }, []);
+
 
   const navigate = useNavigate();
 
