@@ -80,19 +80,16 @@ function Router() {
               <Payments />
             </Layout>
           }
-       
-        
-            <Route
-            path="/designers/:id"
-            element={
-              <Layout>
-                <Rocky/>
-              </Layout>
-            }>
+        />
 
-        </Route>
-
-
+        <Route
+          path="/designers/:id"
+          element={
+            <Layout>
+              <Rocky />
+            </Layout>
+          }
+        />
 
         <Route
           path="/designers/:id"
