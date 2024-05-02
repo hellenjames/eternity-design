@@ -212,7 +212,6 @@ function Signs() {
                 className="bg-[#4c87e0] flex gap-4 justify-center items-center py-[1em] cursor-pointer hover:bg-[#0D47A1]"
                 style={{
                   backgroundColor:
-                    registerSelection === "designer" ? "#0D47A1" : "#4c87e0",
                 }}
 
               >
