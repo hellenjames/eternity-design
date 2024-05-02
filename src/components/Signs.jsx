@@ -10,7 +10,7 @@ import Loader from "./Loader";
 
 import { useNavigate } from "react-router-dom";
 
-// import { Navigate, useNavigate } from "react-router-dom";
+
 
 function Signs() {
   const navigate = useNavigate();
@@ -84,7 +84,7 @@ function Signs() {
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          // console.log(error)
+          
           if (errorCode === "auth/email-already-in-use") {
             setErrorMessage("An account with that emaill already exists");
           }
@@ -167,7 +167,7 @@ function Signs() {
               onChange={handleChange}
             />
           </div>
-          {/* </div> */}
+          
 <label>Register as:</label>
           <div className="flex w-full gap-7">
             
@@ -241,7 +241,7 @@ function Signs() {
           </div>
         </div>
       </div>
-    {/* </div> */}
+    
     </div>
     </>
   );
