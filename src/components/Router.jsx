@@ -64,7 +64,6 @@ function Router() {
               <Designer />
             </Layout>
           }
-
         />
         <Route
           path="/rocky"
@@ -81,8 +80,7 @@ function Router() {
               <Payments />
             </Layout>
           }
-        />
-
+       
         
             <Route
             path="/designers/:id"
@@ -95,6 +93,15 @@ function Router() {
         </Route>
 
 
+
+        <Route
+          path="/designers/:id"
+          element={
+            <Layout>
+              <Rocky />
+            </Layout>
+          }
+        ></Route>
       </Routes>
     </BrowserRouter>
   );
