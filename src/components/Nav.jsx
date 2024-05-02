@@ -23,7 +23,7 @@ function Nav() {
   }
 
   return (
-    <nav className="sticky right-0 left-0 top-0 bg-white h-[10vh] border border-y-[#0D47A1] flex">
+    <nav className="fixed right-0 left-0 top-0 bg-white h-[10vh] border border-y-[#0D47A1] flex">
       {console.log(currentUser)}
       {currentUser && console.log(currentUser.userType)}
       <div className=" container mx-auto flex justify-between items-center ">

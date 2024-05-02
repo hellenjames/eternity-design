@@ -24,7 +24,7 @@ function Hero() {
               </button>
             </div>
           </div>
-          <div className="flex flex-wrap text-white gap-5 mt-8">
+          <div className="flex  text-white gap-5 mt-8">
             <div className="bg-[linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6))] flex flex-col justify-start items-start gap-3 p-[2em]">
               {/* <img src="" alt="icon" width={50}/> */}
               <h3 className="text-[1.5rem] font-medium">Get To know Us </h3>
