@@ -15,7 +15,6 @@ function Formdetail() {
     projectImages: [],
     imageDisplay: "",
   });
-
   const [isLoading, setIsLoading] = useState({
     logo: false,
     display: false,
